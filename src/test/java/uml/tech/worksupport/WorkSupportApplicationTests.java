@@ -30,7 +30,7 @@ class WorkSupportApplicationTests {
         /**
          * [
          *     {
-         *         "unitId": "001",
+         *         "id": "1234567890123456789",
          *         "fwVer": "1.0",
          *         "hwVer": "1.1",
          *         "swVer": "1.8"
@@ -39,7 +39,7 @@ class WorkSupportApplicationTests {
          */
         JSONArray o = new JSONArray();
         JSONObject jo = new JSONObject();
-        jo.set("unitId", "001");
+        jo.set("id", "1234567890123456789");
         jo.set("fwVer", "1.0");
         jo.set("hwVer", "1.1");
         jo.set("swVer", "1.8");
