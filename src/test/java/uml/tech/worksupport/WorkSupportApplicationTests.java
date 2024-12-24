@@ -96,6 +96,8 @@ class WorkSupportApplicationTests {
         jo.set("fileId", 1);
         jo.set("blockNum", 1);
         jo.set("chunk", 4096);
+        jo.set("planId", 1);
+        jo.set("terminalId", "1871378516328308736");
         messageUtil.publish("request/file/" + did, new MqttMessage(jo.toString().getBytes()));
 
         ThreadUtil.sleep(1000 * 10);
