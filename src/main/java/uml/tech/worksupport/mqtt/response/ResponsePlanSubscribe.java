@@ -9,6 +9,7 @@ import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
 import uml.tech.worksupport.common.MqttSubscribeCallback;
+import uml.tech.worksupport.constant.Constants;
 import uml.tech.worksupport.util.MessageUtil;
 import uml.tech.worksupport.util.MqttClientUtil;
 
@@ -19,7 +20,7 @@ public class ResponsePlanSubscribe implements ApplicationRunner {
     private final Log log = LogFactory.get();
     private final String clientId = this.getClass().getSimpleName() + "_" + IdUtil.getSnowflakeNextId();
 
-    private String did = "did1";
+    private final String did = Constants.did;
 
     @Resource
     private MessageUtil messageUtil;

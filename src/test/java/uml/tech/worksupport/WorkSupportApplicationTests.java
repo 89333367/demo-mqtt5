@@ -8,6 +8,7 @@ import cn.hutool.log.LogFactory;
 import org.eclipse.paho.mqttv5.common.MqttMessage;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
+import uml.tech.worksupport.constant.Constants;
 import uml.tech.worksupport.util.MessageUtil;
 import uml.tech.worksupport.util.MqttClientUtil;
 
@@ -22,7 +23,7 @@ class WorkSupportApplicationTests {
     @Resource
     private MessageUtil messageUtil;
 
-    String did = "did1";
+    private final String did = Constants.did;
 
     @Test
     void 上报电控单元信息() {
@@ -30,19 +31,19 @@ class WorkSupportApplicationTests {
         /**
          * [
          *     {
-         *         "id": "1234567890123456789",
+         *         "id": "1",
          *         "fwVer": "1.0",
          *         "hwVer": "1.1",
-         *         "swVer": "1.8"
+         *         "swVer": "1.2"
          *     }
          * ]
          */
         JSONArray o = new JSONArray();
         JSONObject jo = new JSONObject();
-        jo.set("id", "1234567890123456789");
+        jo.set("id", "1");
         jo.set("fwVer", "1.0");
         jo.set("hwVer", "1.1");
-        jo.set("swVer", "1.8");
+        jo.set("swVer", "1.2");
         o.add(jo);
         messageUtil.publish("upload/info/" + did, new MqttMessage(o.toString().getBytes()));
     }
