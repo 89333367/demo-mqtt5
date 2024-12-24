@@ -56,6 +56,14 @@ class WorkSupportApplicationTests {
     }
 
     @Test
+    void 请求升级计划状态() {
+        // request/plan/设备编号/planId
+        messageUtil.publish("request/plan/" + did + "/1", new MqttMessage());
+
+        ThreadUtil.sleep(1000 * 10);
+    }
+
+    @Test
     void 上报各种状态() {
         // upload/status/设备编号
         /**
