@@ -76,7 +76,7 @@ class WorkSupportApplicationTests {
          */
         JSONObject jo = new JSONObject();
         jo.set("planId", 1);
-        jo.set("status", 3);
+        jo.set("status", 4);
         jo.set("terminalId", "1871378516328308736");
         messageUtil.publish("upload/status/" + did, new MqttMessage(jo.toString().getBytes()));
     }
