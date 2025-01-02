@@ -57,9 +57,53 @@ class WorkSupportApplicationTests {
     }
 
     @Test
+    void 上报整个流程状态() {
+        // upload/status/设备编号
+        /**
+         * {
+         *     "planId": 1874632041221660672,
+         *     "status": 2,
+         *     "terminalId": 1874630443015675904
+         * }
+         */
+        JSONObject jo = new JSONObject();
+        jo.set("planId", "1874632041221660672");
+        jo.set("terminalId", "1874630443015675904");
+
+        jo.set("status", 2);//收到升级计划
+        messageUtil.publish("upload/status/" + did, new MqttMessage(jo.toString().getBytes()));
+        ThreadUtil.sleep(1000);
+
+        jo.set("status", 3);//请求升级文件
+        messageUtil.publish("upload/status/" + did, new MqttMessage(jo.toString().getBytes()));
+        ThreadUtil.sleep(1000);
+
+        jo.set("status", 4);//下载升级文件
+        messageUtil.publish("upload/status/" + did, new MqttMessage(jo.toString().getBytes()));
+        ThreadUtil.sleep(1000);
+
+        jo.set("status", 6);//下载文件成功
+        messageUtil.publish("upload/status/" + did, new MqttMessage(jo.toString().getBytes()));
+        ThreadUtil.sleep(1000);
+
+        jo.set("status", 8);//校验文件成功
+        messageUtil.publish("upload/status/" + did, new MqttMessage(jo.toString().getBytes()));
+        ThreadUtil.sleep(1000);
+
+        jo.set("status", 9);//升级
+        messageUtil.publish("upload/status/" + did, new MqttMessage(jo.toString().getBytes()));
+        ThreadUtil.sleep(1000);
+
+        jo.set("status", 1);//升级成功
+        messageUtil.publish("upload/status/" + did, new MqttMessage(jo.toString().getBytes()));
+        ThreadUtil.sleep(1000);
+    }
+
+    @Test
     void 请求升级计划状态() {
         // request/plan/设备编号/planId
-        messageUtil.publish("request/plan/" + did + "/1", new MqttMessage());
+        Long planId = 1874632041221660672L;
+        messageUtil.publish("request/plan/" + did + "/" + planId, new MqttMessage());
 
         ThreadUtil.sleep(1000 * 10);
     }
@@ -76,7 +120,7 @@ class WorkSupportApplicationTests {
          */
         JSONObject jo = new JSONObject();
         jo.set("planId", 1);
-        jo.set("status", 4);
+        jo.set("status", 5);
         jo.set("terminalId", "1871378516328308736");
         messageUtil.publish("upload/status/" + did, new MqttMessage(jo.toString().getBytes()));
     }
